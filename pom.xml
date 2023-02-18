@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>epam</groupId>
-    <artifactId>test</artifactId>
+    <artifactId>assignment</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>test</name>
-    <description>test</description>
+    <name>assignment</name>
+    <description>assignment</description>
     <properties>
         <java.version>17</java.version>
         <testcontainers.version>1.17.6</testcontainers.version>
@@ -22,6 +22,22 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2022.0.1</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>com.h2database</groupId>
