@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceReqResImpl implements UserService {
 
-    private final ReqResUserClient userClient;
-
     @Override
     public boolean userExists(String email) {
 
-        return userClient.getUsers().getData().stream().anyMatch(user -> user.getEmail().equalsIgnoreCase(email));
+        return ReqResUserClient.getUsers().getData().stream().anyMatch(user -> user.getEmail().equalsIgnoreCase(email));
     }
 }

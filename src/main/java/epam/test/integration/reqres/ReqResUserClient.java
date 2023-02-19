@@ -2,12 +2,21 @@ package epam.test.integration.reqres;
 
 import epam.test.integration.reqres.dto.PageableResponse;
 import epam.test.integration.reqres.dto.User;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestTemplate;
 
-@FeignClient(value = "reqres", url = "https://reqres.in/api")
-public interface ReqResUserClient {
+public class ReqResUserClient {
 
-    @GetMapping("/users")
-    PageableResponse<User> getUsers();
+    private static final String BASE_URL = "https://reqres.in/api";
+
+    private static final String USERS_PATH = "users";
+
+    private ReqResUserClient() {
+    }
+
+    public static PageableResponse<User> getUsers() {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        return restTemplate.getForObject(String.format("%s/%s", BASE_URL, USERS_PATH), PageableResponse.class);
+    }
 }
