@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PageableResponse<T> {
+public class PageableResponse {
 
     private Long page;
 
@@ -15,5 +15,5 @@ public class PageableResponse<T> {
 
     private Long totalPages;
 
-    private List<T> data;
+    private List<User> data;
 }

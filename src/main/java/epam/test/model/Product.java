@@ -1,9 +1,6 @@
 package epam.test.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -12,8 +9,9 @@ import lombok.Data;
 public class Product {
 
     @Id
-    private Long productID;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
-    @Column(name = "product_name")
-    private String productName;
+    @Column(name = "name")
+    private String name;
 }

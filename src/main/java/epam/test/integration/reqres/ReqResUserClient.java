@@ -4,6 +4,8 @@ import epam.test.integration.reqres.dto.PageableResponse;
 import epam.test.integration.reqres.dto.User;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 public class ReqResUserClient {
 
     private static final String BASE_URL = "https://reqres.in/api";
@@ -13,7 +15,7 @@ public class ReqResUserClient {
     private ReqResUserClient() {
     }
 
-    public static PageableResponse<User> getUsers() {
+    public static PageableResponse getUsers() {
 
         RestTemplate restTemplate = new RestTemplate();
 

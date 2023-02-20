@@ -1,7 +1,6 @@
 package epam.test.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 
 @Entity
@@ -10,6 +9,7 @@ import lombok.Data;
 public class Order {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long orderID;
 
     @Column(name = "productID")
