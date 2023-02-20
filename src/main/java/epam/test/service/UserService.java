@@ -1,6 +1,10 @@
 package epam.test.service;
 
+import epam.test.model.User;
+
+import java.util.Optional;
+
 public interface UserService {
 
-    boolean userExists(String email);
+    Optional<User> getUser(String email);
 }

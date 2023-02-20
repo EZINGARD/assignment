@@ -6,5 +6,5 @@ public interface OrderService {
 
     Order createOrder(String email, Long productId);
 
-
+    Iterable<Order> getOrders();
 }
