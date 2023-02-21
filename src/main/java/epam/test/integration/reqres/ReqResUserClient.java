@@ -1,10 +1,7 @@
 package epam.test.integration.reqres;
 
 import epam.test.integration.reqres.dto.PageableResponse;
-import epam.test.integration.reqres.dto.User;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 public class ReqResUserClient {
 
