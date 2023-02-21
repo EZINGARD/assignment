@@ -1,5 +1,6 @@
 package epam.test.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class Order {
     private Long orderID;
 
     @Column(name = "productID")
+    @JsonProperty("productID")
     private Long productId;
 
     @Column(name = "email", nullable = false)

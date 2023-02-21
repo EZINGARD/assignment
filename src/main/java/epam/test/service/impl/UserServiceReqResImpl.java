@@ -26,4 +26,19 @@ public class UserServiceReqResImpl implements UserService {
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName()).build());
     }
+
+    @Override
+    public User getFirstUser() {
+
+        epam.test.integration.reqres.dto.User dto = ReqResUserClient.getUsers().getData().get(0);
+
+        if(dto == null) {
+            return null;
+        }
+
+        return User.builder()
+                .email(dto.getEmail())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName()).build();
+    }
 }

@@ -5,6 +5,7 @@ import epam.test.model.Product;
 import epam.test.service.OrderService;
 import epam.test.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +21,20 @@ public class OrderController {
     //Not the best practice. Better be in a separate controller/MS. Added just for convenience.
     private final ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<Iterable<Order>> getOrders() {
         return ResponseEntity.ok(orderService.getOrders());
     }
 
-    @GetMapping("/products")
+    @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<Iterable<Product>> getProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
-    @PostMapping ("/")
+    @PostMapping (value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<Order> createOrder(@RequestParam(name = "email") String email, @RequestParam(name = "productID") Long productId) {
         return ResponseEntity.ok(orderService.createOrder(email, productId));
     }
