@@ -55,7 +55,7 @@ public class OrdersIntegrationTests {
     }
 
     @Test
-    public void createOrderUserNotFound() throws Exception {
+    public void createOrderUserNotFound_400() throws Exception {
         mockMvc.perform(post("/order/")
                         .param("email","invalid")
                         .param("productID", "1")
@@ -65,7 +65,7 @@ public class OrdersIntegrationTests {
     }
 
     @Test
-    public void createOrderProductNotFound() throws Exception {
+    public void createOrderProductNotFound_400() throws Exception {
 
         String exisingEmail = userService.getFirstUser().getEmail();
 
@@ -91,8 +91,8 @@ public class OrdersIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.orderID", is(1)))
-                .andExpect(jsonPath("$.firstName", is(user.getFirstName())))
-                .andExpect(jsonPath("$.lastName", is(user.getLastName())))
+                .andExpect(jsonPath("$.first_name", is(user.getFirstName())))
+                .andExpect(jsonPath("$.last_name", is(user.getLastName())))
                 .andExpect(jsonPath("$.productID", is(productId)))
                 .andExpect(jsonPath("$.email", is(user.getEmail())));
     }
