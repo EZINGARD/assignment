@@ -1,0 +1,72 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://127.0.0.1:8080
+    description: Generated server url
+paths:
+  /order/:
+    get:
+      tags:
+        - order-controller
+      operationId: getOrders
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+        - order-controller
+      operationId: createOrder
+      parameters:
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: productID
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /order/products:
+    get:
+      tags:
+        - order-controller
+      operationId: getProducts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        orderID:
+          type: integer
+          format: int64
+        email:
+          type: string
+        productID:
+          type: integer
+          format: int64
+        first_name:
+          type: string
+        last_name:
+          type: string
