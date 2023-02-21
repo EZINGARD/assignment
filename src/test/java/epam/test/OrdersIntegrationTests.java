@@ -3,7 +3,9 @@ package epam.test;
 import epam.test.exception.ProductNotFoundException;
 import epam.test.exception.UserNotFoundException;
 import epam.test.model.User;
+import epam.test.service.OrderService;
 import epam.test.service.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,14 @@ public class OrdersIntegrationTests {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Before
+    public void clearOrders() {
+        orderService.clearOrders();
+    }
 
     @Test
     public void getProducts_200() throws Exception {
@@ -72,16 +82,33 @@ public class OrdersIntegrationTests {
 
         User user = userService.getFirstUser();
 
+        Integer productId = 1;
+
         mockMvc.perform(post("/order/")
                         .param("email", user.getEmail())
-                        .param("productID", "2")
+                        .param("productID", productId.toString())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.orderID", is(1)))
                 .andExpect(jsonPath("$.firstName", is(user.getFirstName())))
                 .andExpect(jsonPath("$.lastName", is(user.getLastName())))
-                .andExpect(jsonPath("$.productID", is(2)))
+                .andExpect(jsonPath("$.productID", is(productId)))
                 .andExpect(jsonPath("$.email", is(user.getEmail())));
+    }
+
+    @Test
+    public void getOrders_200() throws Exception {
+
+        User user = userService.getFirstUser();
+
+        orderService.createOrder(user.getEmail(), 1L);
+        orderService.createOrder(user.getEmail(), 2L);
+
+        mockMvc.perform(get("/order/")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 }

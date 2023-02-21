@@ -49,4 +49,9 @@ public class OrderServiceImpl implements OrderService {
     public Iterable<Order> getOrders() {
         return orderRepository.findAll();
     }
+
+    @Override
+    public void clearOrders() {
+        orderRepository.deleteAll();
+    }
 }
