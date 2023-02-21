@@ -5,4 +5,6 @@ import epam.test.model.Product;
 public interface ProductService {
 
     Iterable<Product> getAllProducts();
+
+    boolean productExists(Long id);
 }

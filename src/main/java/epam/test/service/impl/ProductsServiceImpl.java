@@ -17,4 +17,9 @@ public class ProductsServiceImpl implements ProductService {
     public Iterable<Product> getAllProducts() {
         return productRepository.findAll();
     }
+
+    @Override
+    public boolean productExists(Long id) {
+        return productRepository.existsById(id);
+    }
 }

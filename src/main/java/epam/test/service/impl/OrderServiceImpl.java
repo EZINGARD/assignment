@@ -6,8 +6,8 @@ import epam.test.exception.UserNotFoundException;
 import epam.test.model.Order;
 import epam.test.model.User;
 import epam.test.repository.OrderRepository;
-import epam.test.repository.ProductRepository;
 import epam.test.service.OrderService;
+import epam.test.service.ProductService;
 import epam.test.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,8 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
-    // Not the best practice. Should be Service instead
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Override
     public Order createOrder(String email, Long productId) {
@@ -32,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderExistsException();
         }
 
-        if(!productRepository.existsById(productId)) {
+        if(!productService.productExists(productId)) {
             throw new ProductNotFoundException();
         }
 
